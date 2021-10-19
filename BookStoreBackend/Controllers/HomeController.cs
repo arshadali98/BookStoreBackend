@@ -10,7 +10,7 @@ namespace BookStoreBackend.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
+            ViewBag.Title = "Home Page2";
 
             return View();
         }
