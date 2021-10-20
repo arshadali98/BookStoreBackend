@@ -10,9 +10,13 @@ namespace BookStoreBackend.Controllers
     {
         public ActionResult Index()
         {
+<<<<<<< Updated upstream
             ViewBag.Title = "Home Page2";
             ViewBag.Name = "Books";
             ViewBag.Type = "BackEnd";
+=======
+            ViewBag.Title = "Home Page";
+>>>>>>> Stashed changes
 
             return View();
         }
