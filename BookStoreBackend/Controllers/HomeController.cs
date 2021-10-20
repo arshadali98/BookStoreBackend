@@ -11,6 +11,8 @@ namespace BookStoreBackend.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = "Home Page2";
+            ViewBag.Name = "Books";
+            ViewBag.Type = "BackEnd";
 
             return View();
         }
