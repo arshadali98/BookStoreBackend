@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BookStoreDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tbl_books">
+    <Key>
+      <PropertyRef Name="BookId" />
+    </Key>
+    <Property Name="BookId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryId" Type="Int32" />
+    <Property Name="Title" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="ISBN" Type="Int32" />
+    <Property Name="Year" Type="Int32" />
+    <Property Name="Price" Type="Double" />
+    <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Position" Type="Int32" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Author" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Stock" Type="Int32" />
+    <NavigationProperty Name="tbl_category" Relationship="Self.FK__tbl_books__Categ__38996AB5" FromRole="tbl_books" ToRole="tbl_category" />
+    <NavigationProperty Name="tbl_cart" Relationship="Self.FK__tbl_cart__BookId__412EB0B6" FromRole="tbl_books" ToRole="tbl_cart" />
+  </EntityType>
+  <EntityType Name="tbl_cart">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BookId" Type="Int32" />
+    <Property Name="OrderId" Type="Int32" />
+    <Property Name="BookQuantity" Type="Int32" />
+    <NavigationProperty Name="tbl_books" Relationship="Self.FK__tbl_cart__BookId__412EB0B6" FromRole="tbl_cart" ToRole="tbl_books" />
+    <NavigationProperty Name="tbl_orders" Relationship="Self.FK__tbl_cart__OrderI__4222D4EF" FromRole="tbl_cart" ToRole="tbl_orders" />
+  </EntityType>
+  <EntityType Name="tbl_category">
+    <Key>
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="Position" Type="Int32" />
+    <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="tbl_books" Relationship="Self.FK__tbl_books__Categ__38996AB5" FromRole="tbl_category" ToRole="tbl_books" />
+  </EntityType>
+  <EntityType Name="tbl_orders">
+    <Key>
+      <PropertyRef Name="OrderId" />
+    </Key>
+    <Property Name="OrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CustomerId" Type="Int32" />
+    <Property Name="TotalPrice" Type="Double" />
+    <NavigationProperty Name="tbl_cart" Relationship="Self.FK__tbl_cart__OrderI__4222D4EF" FromRole="tbl_orders" ToRole="tbl_cart" />
+    <NavigationProperty Name="tbl_users" Relationship="Self.FK__tbl_order__Custo__3E52440B" FromRole="tbl_orders" ToRole="tbl_users" />
+  </EntityType>
+  <EntityType Name="tbl_users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Role" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tbl_orders" Relationship="Self.FK__tbl_order__Custo__3E52440B" FromRole="tbl_users" ToRole="tbl_orders" />
+  </EntityType>
+  <Association Name="FK__tbl_books__Categ__38996AB5">
+    <End Role="tbl_category" Type="Self.tbl_category" Multiplicity="0..1" />
+    <End Role="tbl_books" Type="Self.tbl_books" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_category">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="tbl_books">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_cart__BookId__412EB0B6">
+    <End Role="tbl_books" Type="Self.tbl_books" Multiplicity="0..1" />
+    <End Role="tbl_cart" Type="Self.tbl_cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_books">
+        <PropertyRef Name="BookId" />
+      </Principal>
+      <Dependent Role="tbl_cart">
+        <PropertyRef Name="BookId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_cart__OrderI__4222D4EF">
+    <End Role="tbl_orders" Type="Self.tbl_orders" Multiplicity="0..1" />
+    <End Role="tbl_cart" Type="Self.tbl_cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_orders">
+        <PropertyRef Name="OrderId" />
+      </Principal>
+      <Dependent Role="tbl_cart">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_order__Custo__3E52440B">
+    <End Role="tbl_users" Type="Self.tbl_users" Multiplicity="0..1" />
+    <End Role="tbl_orders" Type="Self.tbl_orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="tbl_orders">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BookStoreDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tbl_books" EntityType="Self.tbl_books" />
+    <EntitySet Name="tbl_cart" EntityType="Self.tbl_cart" />
+    <EntitySet Name="tbl_category" EntityType="Self.tbl_category" />
+    <EntitySet Name="tbl_orders" EntityType="Self.tbl_orders" />
+    <EntitySet Name="tbl_users" EntityType="Self.tbl_users" />
+    <AssociationSet Name="FK__tbl_books__Categ__38996AB5" Association="Self.FK__tbl_books__Categ__38996AB5">
+      <End Role="tbl_category" EntitySet="tbl_category" />
+      <End Role="tbl_books" EntitySet="tbl_books" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_cart__BookId__412EB0B6" Association="Self.FK__tbl_cart__BookId__412EB0B6">
+      <End Role="tbl_books" EntitySet="tbl_books" />
+      <End Role="tbl_cart" EntitySet="tbl_cart" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_cart__OrderI__4222D4EF" Association="Self.FK__tbl_cart__OrderI__4222D4EF">
+      <End Role="tbl_orders" EntitySet="tbl_orders" />
+      <End Role="tbl_cart" EntitySet="tbl_cart" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_order__Custo__3E52440B" Association="Self.FK__tbl_order__Custo__3E52440B">
+      <End Role="tbl_users" EntitySet="tbl_users" />
+      <End Role="tbl_orders" EntitySet="tbl_orders" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
