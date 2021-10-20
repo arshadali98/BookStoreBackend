@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="932e2bfc74e94fa4b0c783d1dc9ef4b6" Name="Diagram1" ZoomLevel="72">
+        <EntityTypeShape EntityType="BookStoreDBModel.tbl_books" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookStoreDBModel.tbl_cart" Width="1.5" PointX="5.25" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookStoreDBModel.tbl_category" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookStoreDBModel.tbl_orders" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookStoreDBModel.tbl_users" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="BookStoreDBModel.FK__tbl_books__Categ__38996AB5" ManuallyRouted="false" />
+        <AssociationConnector Association="BookStoreDBModel.FK__tbl_cart__BookId__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="BookStoreDBModel.FK__tbl_cart__OrderI__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="BookStoreDBModel.FK__tbl_order__Custo__3E52440B" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
